@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils";
 type Tone = "neutral" | "positive" | "negative" | "warning";
 
 const toneStyles: Record<Tone, string> = {
-  neutral: "text-text-secondary bg-white/5 border border-border-subtle",
-  positive: "text-accent-green bg-accent-green/10 border border-accent-green/25",
-  negative: "text-accent-red bg-accent-red/12 border border-accent-red/25",
-  warning: "text-accent-yellow bg-accent-yellow/10 border border-accent-yellow/25",
+  neutral: "text-text-secondary bg-surface-700/50 border border-border-subtle/50",
+  positive: "text-accent-green bg-accent-green/5 border border-accent-green/20",
+  negative: "text-accent-red bg-accent-red/5 border border-accent-red/20",
+  warning: "text-accent-yellow bg-accent-yellow/5 border border-accent-yellow/20",
 };
 
 interface Props {
@@ -23,7 +23,7 @@ export function Badge({ label, tone = "neutral", icon, className, dotted }: Prop
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1 rounded-full px-2 py-1 text-[11px] font-semibold uppercase tracking-wide",
+        "inline-flex items-center justify-center gap-1 rounded px-2 py-1 text-[11px] font-medium",
         toneStyles[tone],
         dotted ? "border-dashed" : "",
         className,

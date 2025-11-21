@@ -113,37 +113,44 @@ export function TokenRow({ token, compact }: Props) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-2">
-        <div className="grid flex-1 grid-cols-3 gap-1">
-          {token.info.map((info, idx) => (
-            <Badge
-              key={idx}
-              label={info.value}
-              tone={info.tone === "positive" ? "positive" : info.tone === "negative" ? "negative" : "neutral"}
-              className="h-5 min-w-[60px] rounded-[6px] border border-border-subtle/70 bg-surface-800/80 px-2 text-[11px] font-medium leading-tight"
-            />
-          ))}
-        </div>
-        <div className="flex items-center gap-1">
-          <Tooltip label="Analysis">
-            <IconButton size="sm" className="h-7 w-7 border border-border-subtle bg-surface-800">
-              <Info size={13} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip label="Open on chain">
-            <IconButton size="sm" className="h-7 w-7 border border-border-subtle bg-surface-800">
-              <ExternalLink size={13} />
-            </IconButton>
-          </Tooltip>
+      <div className="min-w-0 flex flex-1 flex-row px-[12px] justify-start items-center">
+        <div className="flex flex-row gap-[4px] min-w-[72px] justify-start items-center">
+          <div className="flex flex-col gap-[4px] justify-start items-start">
+            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
+              <span className="text-accent-red font-mono text-[10px] sm:text-[11px] font-medium">{token.info[0]?.value || "22.88%"}</span>
+            </div>
+            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
+              <span className="text-accent-green font-mono text-[10px] sm:text-[11px] font-medium">{token.info[1]?.value || "0%"}</span>
+            </div>
+            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
+              <span className="text-accent-green font-mono text-[10px] sm:text-[11px] font-medium">{token.info[2]?.value || "0%"}</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-[4px] justify-start items-start">
+            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
+              <span className="text-accent-green font-mono text-[10px] sm:text-[11px] font-medium">{token.info[3]?.value || "0%"}</span>
+            </div>
+            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
+              <span className={cn(
+                "font-mono text-[10px] sm:text-[11px] font-medium",
+                token.safety === "paid" ? "text-accent-green" : "text-accent-red"
+              )}>
+                {token.safety === "paid" ? "Paid" : "Unpaid"}
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-[4px] justify-start items-start">
+            <div className="text-text-secondary bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
+              <span className="font-mono text-[10px] sm:text-[11px] font-medium">{token.txns.buys + token.txns.sells}</span>
+            </div>
+            <div className="text-text-secondary bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
+              <span className="font-mono text-[10px] sm:text-[11px] font-medium">{Math.floor(token.txns.buys / 6)}</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="flex items-center justify-end gap-2">
-        <Badge
-          label={token.safety === "paid" ? "Paid" : "Unpaid"}
-          tone={token.safety === "paid" ? "positive" : "negative"}
-          className="text-[11px]"
-        />
         <Dialog
           title="Quick Buy"
           description={`Simulated swap for ${token.symbol}`}
