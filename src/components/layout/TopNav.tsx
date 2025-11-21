@@ -14,7 +14,10 @@ import { IconButton } from "@/components/ui/icon-button";
 import { Tooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
-const navItems = [
+type NavTone = "accent" | "primary";
+type NavItem = { label: string; tone?: NavTone };
+
+const navItems: NavItem[] = [
   { label: "Discover", tone: "accent" },
   { label: "Pulse", tone: "primary" },
   { label: "Trackers" },
