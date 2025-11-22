@@ -1,10 +1,7 @@
 import { mockTokens } from "@/data/mockTokens";
 import { TokenRowData, TokenCategory, TokenTier } from "@/types/token";
 
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-
 export async function fetchTokens() {
-  await wait(520 + Math.random() * 180);
   return mockTokens;
 }
 

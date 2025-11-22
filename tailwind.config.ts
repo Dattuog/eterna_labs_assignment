@@ -38,6 +38,10 @@ const config: Config = {
           subtle: "#1b1f2d",
           strong: "#2a3041",
         },
+        primaryStroke: "#1b1f2d",
+        secondaryStroke: "#2a3041",
+        textPrimary: "#f5f7ff",
+        primaryGreen: "#16d37e",
       },
       boxShadow: {
         card: "0 10px 40px rgba(0,0,0,0.35)",

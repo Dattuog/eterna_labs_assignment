@@ -14,8 +14,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { IconButton } from "@/components/ui/icon-button";
-import { Tooltip } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
 type NavTone = "accent" | "primary";
@@ -70,38 +68,58 @@ export function TopNav() {
           Deposit
         </Button>
 
-        <div className="hidden items-center gap-2 sm:flex">
-          <Tooltip label="Favorites">
-            <IconButton size="sm">
-              <Star size={16} />
-            </IconButton>
-          </Tooltip>
-          <Tooltip label="Alerts">
-            <IconButton size="sm">
-              <Bell size={16} />
-            </IconButton>
-          </Tooltip>
-        </div>
+        <div className="hidden items-center gap-[8px] sm:flex lg:gap-[16px]">
+          <button className="flex h-[32px] w-[32px] items-center justify-center gap-[8px] rounded-full bg-primaryStroke hover:bg-secondaryStroke/80">
+            <Star size={18} className="flex-shrink-0 text-textPrimary" />
+          </button>
 
-        <div className="hidden items-center gap-3 rounded-full border border-border-subtle bg-surface-800/80 pl-3 pr-2 py-1 shadow-inner sm:flex">
-          <Wallet size={16} className="text-text-secondary" />
-          <div className="flex items-center gap-1.5">
-            <Image src="/icons/solana-logo.png" alt="SOL" width={14} height={14} />
-            <span className="text-sm font-bold text-white">0</span>
+          <div className="relative flex">
+            <div className="w-full">
+              <button className="relative flex h-[32px] w-[32px] items-center justify-center gap-[8px] rounded-full bg-primaryStroke hover:bg-secondaryStroke/80">
+                <Bell size={18} className="flex-shrink-0 text-textPrimary" />
+              </button>
+            </div>
           </div>
-          <div className="h-4 w-[1px] bg-border-subtle" />
-          <div className="flex items-center gap-1.5">
-            <Image src="/icons/wallet-logo.png" alt="USDC" width={14} height={14} />
-            <span className="text-sm font-bold text-white">0</span>
-          </div>
-          <ChevronDown size={14} className="text-text-muted ml-1" />
-        </div>
 
-        <Tooltip label="Profile & settings">
-          <IconButton size="sm">
-            <UserCog size={18} />
-          </IconButton>
-        </Tooltip>
+          <div className="relative flex">
+            <div className="w-full">
+              <div className="flex-shrink-0">
+                <button className="flex h-[32px] w-fit min-w-max flex-row items-center justify-center gap-[8px] rounded-full bg-primaryStroke px-[12px] py-[8px] transition-colors hover:bg-secondaryStroke/80 hover:bg-opacity-80">
+                  <Wallet size={18} className="flex-shrink-0 text-textPrimary" />
+                  <div className="hidden flex-shrink-0 flex-row items-center justify-start gap-[4px] whitespace-nowrap xl:flex">
+                    <Image
+                      alt="SOL"
+                      width={16}
+                      height={16}
+                      src="/icons/solana-logo.png"
+                      className="rounded-sm"
+                    />
+                    <span className="text-[14px] font-semibold text-textPrimary">0</span>
+                  </div>
+                  <div className="hidden h-full w-[1px] flex-shrink-0 bg-secondaryStroke xl:block" />
+                  <div className="hidden flex-shrink-0 flex-row items-center justify-start gap-[4px] whitespace-nowrap xl:flex">
+                    <Image
+                      alt="USDC"
+                      width={16}
+                      height={16}
+                      src="/icons/wallet-logo.png"
+                    />
+                    <span className="text-[14px] font-semibold text-textPrimary">0</span>
+                  </div>
+                  <ChevronDown size={18} className="flex-shrink-0 text-textPrimary" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative flex">
+            <div className="w-full">
+              <button className="flex h-[32px] w-[32px] items-center justify-center gap-[8px] rounded-full bg-primaryStroke hover:bg-secondaryStroke/80">
+                <UserCog size={18} className="flex-shrink-0 text-textPrimary" />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );
