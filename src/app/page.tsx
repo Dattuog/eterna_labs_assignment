@@ -9,7 +9,6 @@ import { StatusBar } from "@/components/layout/StatusBar";
 import { TokenTable } from "@/components/table/TokenTable";
 import { Button } from "@/components/ui/button";
 import { ControlBar } from "@/components/layout/ControlBar";
-import { useProgressiveReveal } from "@/hooks/useProgressiveReveal";
 import { useTokenFeed } from "@/hooks/useTokenFeed";
 import { mockTokens } from "@/data/mockTokens";
 import { fetchTokens, filterTokens } from "@/lib/api";
@@ -84,7 +83,7 @@ export default function Home() {
     });
   }, [filtered, ui.sort.direction, ui.sort.field]);
 
-  const progressiveRows = useProgressiveReveal(sorted, 120);
+
 
   const handleSort = (field: typeof ui.sort.field) => {
     const direction =
@@ -111,7 +110,7 @@ export default function Home() {
           </div>
         ) : null}
         <TokenTable
-          tokens={progressiveRows}
+          tokens={sorted}
           isLoading={showLoading}
           sort={ui.sort}
           compact={ui.compactRows}

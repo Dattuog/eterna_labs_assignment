@@ -9,6 +9,7 @@ import {
   Settings,
   Star,
 } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { IconButton } from "@/components/ui/icon-button";
 import { Tooltip } from "@/components/ui/tooltip";
@@ -36,13 +37,13 @@ export function TopNav() {
       </div>
 
       <div className="relative hidden min-w-0 flex-1 items-center sm:flex">
-        <div className="flex overflow-x-auto no-scrollbar">
-          <nav className="flex items-center gap-1 text-sm font-medium text-text-secondary">
-            {navItems.map((item) => (
-              <NavButton key={item.label} label={item.label} tone={item.tone} />
-            ))}
-          </nav>
-        </div>
+        <nav className="flex w-full items-center gap-1 overflow-x-auto no-scrollbar text-sm font-medium text-text-secondary">
+          {navItems.map((item) => (
+            <Link key={item.label} href={`/${item.label.toLowerCase()}?chain=sol`}>
+              <NavButton label={item.label} tone={item.tone} />
+            </Link>
+          ))}
+        </nav>
       </div>
 
       <div className="flex flex-shrink-0 items-center gap-2 sm:gap-3">
@@ -102,9 +103,9 @@ function NavButton({ label, tone }: { label: string; tone?: "accent" | "primary"
   return (
     <button
       className={cn(
-        "h-8 min-w-fit px-2 text-nowrap rounded transition text-[14px] font-medium",
+        "h-8 min-w-fit flex-shrink-0 px-2 text-nowrap rounded transition text-[14px] font-medium",
         tone === "accent" ? "text-[#3264ff]" : "",
-        tone === "primary" ? "text-white" : "text-text-secondary hover:text-white",
+        tone === "primary" ? "text-white" : "text-text-secondary hover:text-white hover:bg-accent-blue/20 hover:text-accent-blue",
       )}
     >
       {label}

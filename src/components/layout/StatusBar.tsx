@@ -23,7 +23,7 @@ export function StatusBar() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-30 bg-base-900">
       <div className="mx-auto flex h-8 w-full max-w-[1536px] items-center gap-3 overflow-x-auto px-4 text-[12px] text-text-secondary no-scrollbar">
-        <button className="flex h-6 items-center gap-1 rounded-[4px] bg-primaryBlue/20 px-2 text-primaryBlue transition hover:bg-primaryBlue/25">
+        <button className="flex h-6 items-center gap-1 rounded-[4px] bg-accent-blue/20 px-2 text-accent-blue transition hover:bg-accent-blue/25">
           <Settings size={14} />
           <span className="font-semibold">PRESET 1</span>
         </button>

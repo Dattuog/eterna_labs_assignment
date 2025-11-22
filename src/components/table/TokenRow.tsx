@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpDown, ExternalLink, Globe2, Info, Link2, Lock, ShieldCheck } from "lucide-react";
+import { ArrowUpDown, Clock, ExternalLink, Globe2, Info, Link2, Lock, Search, ShieldCheck, User } from "lucide-react";
 import { Sparkline } from "@/components/charts/Sparkline";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { IconButton } from "@/components/ui/icon-button";
 import { Tooltip } from "@/components/ui/tooltip";
-import { usePriceFlash } from "@/hooks/usePriceFlash";
+
 import { formatCurrency, formatPercent } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import { TokenRowData } from "@/types/token";
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export function TokenRow({ token, compact }: Props) {
-  const flash = usePriceFlash(token.marketCap);
+
   const changeTone = token.marketCapChange >= 0 ? "text-accent-green" : "text-accent-red";
   const isFresh = token.createdAgo.includes("m");
   const isOlder = token.createdAgo.includes("d") || token.createdAgo.includes("mo");
@@ -29,7 +29,7 @@ export function TokenRow({ token, compact }: Props) {
   return (
     <div
       className={cn(
-        "token-row-hover grid grid-cols-[1.5fr,1.1fr,1fr,1fr,0.9fr,1.2fr,0.9fr,0.7fr] items-center gap-3 border-t border-border-subtle/60 px-3 py-3 first:border-t-0",
+        "token-row-hover grid grid-cols-[1.5fr,1.1fr,1fr,1fr,1fr,0.9fr,1.2fr,0.7fr] items-center gap-3 border-t border-border-subtle/60 px-3 py-3 first:border-t-0",
         compact ? "py-2.5" : "py-3",
       )}
     >
@@ -74,7 +74,7 @@ export function TokenRow({ token, compact }: Props) {
             </span>
             <Globe2 size={12} className="text-text-muted" />
             <Link2 size={12} className="text-text-muted" />
-            <ArrowUpDown size={12} className="text-text-muted" />
+            <Search size={12} className="text-text-muted" />
           </div>
         </div>
       </div>
@@ -84,13 +84,7 @@ export function TokenRow({ token, compact }: Props) {
       </div>
 
       <div className="space-y-1">
-        <div
-          className={cn(
-            "text-sm font-semibold",
-            flash === "up" && "animate-flash-up",
-            flash === "down" && "animate-flash-down",
-          )}
-        >
+        <div className="text-sm font-semibold">
           {formatCurrency(token.marketCap)}
         </div>
         <div className={cn("text-xs font-semibold", changeTone)}>{formatPercent(token.marketCapChange)}</div>
@@ -113,48 +107,42 @@ export function TokenRow({ token, compact }: Props) {
         </div>
       </div>
 
-      <div className="min-w-0 flex flex-1 flex-row px-[12px] justify-start items-center">
-        <div className="flex flex-row gap-[4px] min-w-[72px] justify-start items-center">
-          <div className="flex flex-col gap-[4px] justify-start items-start">
-            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
-              <span className="text-accent-red font-mono text-[10px] sm:text-[11px] font-medium">{token.info[0]?.value || "22.88%"}</span>
-            </div>
-            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
-              <span className="text-accent-green font-mono text-[10px] sm:text-[11px] font-medium">{token.info[1]?.value || "0%"}</span>
-            </div>
-            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
-              <span className="text-accent-green font-mono text-[10px] sm:text-[11px] font-medium">{token.info[2]?.value || "0%"}</span>
-            </div>
-          </div>
-          <div className="flex flex-col gap-[4px] justify-start items-start">
-            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
-              <span className="text-accent-green font-mono text-[10px] sm:text-[11px] font-medium">{token.info[3]?.value || "0%"}</span>
-            </div>
-            <div className="bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
-              <span className={cn(
-                "font-mono text-[10px] sm:text-[11px] font-medium",
-                token.safety === "paid" ? "text-accent-green" : "text-accent-red"
-              )}>
-                {token.safety === "paid" ? "Paid" : "Unpaid"}
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col gap-[4px] justify-start items-start">
-            <div className="text-text-secondary bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
-              <span className="font-mono text-[10px] sm:text-[11px] font-medium">{token.txns.buys + token.txns.sells}</span>
-            </div>
-            <div className="text-text-secondary bg-surface-800 border-border-subtle/50 border-[1px] flex flex-row h-[16px] min-h-[16px] max-h-[16px] sm:h-[20px] sm:min-h-[20px] sm:max-h-[20px] px-[4px] gap-[4px] justify-start items-center rounded-[4px]">
-              <span className="font-mono text-[10px] sm:text-[11px] font-medium">{Math.floor(token.txns.buys / 6)}</span>
-            </div>
-          </div>
+      <div className="grid grid-cols-3 gap-x-4 gap-y-1 text-[11px] font-medium">
+        <span className={token.info[0]?.tone === "negative" ? "text-accent-red" : "text-accent-green"}>
+          {token.info[0]?.value || "-"}
+        </span>
+        <span className={token.info[1]?.tone === "negative" ? "text-accent-red" : "text-accent-green"}>
+          {token.info[1]?.value || "-"}
+        </span>
+        <div className="flex items-center gap-1 text-text-secondary">
+          <User size={12} /> {token.txns.buys}
         </div>
+
+        <span className={token.info[2]?.tone === "negative" ? "text-accent-red" : "text-accent-green"}>
+          {token.info[2]?.value || "-"}
+        </span>
+        <span className={token.info[3]?.tone === "negative" ? "text-accent-red" : "text-accent-green"}>
+          {token.info[3]?.value || "-"}
+        </span>
+        <div className="flex items-center gap-1 text-text-secondary">
+          <Clock size={12} /> {token.txns.sells}
+        </div>
+
+        <span className={token.info[4]?.tone === "negative" ? "text-accent-red" : "text-accent-green"}>
+          {token.info[4]?.value || "-"}
+        </span>
+        <span className={token.info[5]?.tone === "negative" ? "text-accent-red" : "text-accent-green"}>
+          {token.info[5]?.value || "-"}
+        </span>
+        <div />
       </div>
+
 
       <div className="flex items-center justify-end gap-2">
         <Dialog
           title="Quick Buy"
           description={`Simulated swap for ${token.symbol}`}
-          trigger={<Button className="min-w-[68px] h-8 bg-accent-blue px-3 text-[12px] font-bold text-white">Buy</Button>}
+          trigger={<Button className="h-8 min-w-[68px] rounded-full bg-[#3264ff] px-4 text-[13px] font-bold text-white hover:bg-[#3264ff]/90">Buy</Button>}
         >
           <div className="space-y-3 text-sm text-text-secondary">
             <div className="rounded-xl border border-border-subtle bg-surface-800 p-3">
@@ -174,6 +162,6 @@ export function TokenRow({ token, compact }: Props) {
           </div>
         </Dialog>
       </div>
-    </div>
+    </div >
   );
 }

@@ -1,5 +1,5 @@
 "use client";
- 
+
 import type { ReactNode } from "react";
 import {
   BookmarkX,
@@ -66,7 +66,7 @@ export function ControlBar() {
               key={tf}
               className={cn(
                 "flex h-8 items-center justify-center rounded px-2 text-[14px] font-medium",
-                tf === timeframe ? "text-primaryBlue" : "text-text-primary",
+                tf === timeframe ? "text-accent-blue" : "text-text-primary",
               )}
               onClick={() => dispatch(setTimeframe(tf))}
             >
@@ -152,7 +152,7 @@ export function ControlBar() {
                 className={cn(
                   "flex h-6 w-6 items-center justify-center rounded-[4px] text-[13px] font-medium transition-colors",
                   playlist === pl
-                    ? "bg-primaryBlue/10 text-primaryBlue"
+                    ? "bg-accent-blue/10 text-accent-blue"
                     : "text-text-secondary hover:bg-border-subtle/60",
                 )}
               >

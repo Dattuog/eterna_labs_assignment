@@ -49,7 +49,7 @@ export function TokenTable({ tokens, isLoading, sort, onSort, compact, onRetry }
     <div className="overflow-hidden rounded-xl border border-border-subtle bg-surface-900/80">
       <div className="w-full overflow-x-auto">
         <div className="min-w-[1220px]">
-          <div className="sticky top-0 z-10 grid h-8 sm:h-12 grid-cols-[1.5fr,1.1fr,1fr,1fr,0.9fr,1.2fr,1fr,0.7fr] items-center gap-3 border-b border-border-subtle bg-surface-900 px-0 sm:px-2 text-[12px] font-medium text-text-secondary">
+          <div className="sticky top-0 z-10 grid h-8 sm:h-12 grid-cols-[1.5fr,1.1fr,1fr,1fr,1fr,0.9fr,1.2fr,0.7fr] items-center gap-3 border-b border-border-subtle bg-surface-900 px-0 sm:px-2 text-[12px] font-medium text-text-secondary">
             {headers.map((header, idx) => (
               <div
                 key={header.label}
@@ -76,18 +76,18 @@ export function TokenTable({ tokens, isLoading, sort, onSort, compact, onRetry }
           <div className="max-h-[620px] divide-y divide-border-subtle overflow-y-auto">
             {isLoading
               ? skeletons.map((_, idx) => (
-                  <div
-                    key={idx}
-                    className="grid grid-cols-[1.5fr,1fr,1fr,1fr,1fr,0.9fr,1.2fr,0.7fr] items-center gap-4 px-4 py-3"
-                  >
-                    {headers.map((_, colIdx) => (
-                      <Skeleton
-                        key={colIdx}
-                        className="h-6 w-full rounded-lg bg-white/5"
-                      />
-                    ))}
-                  </div>
-                ))
+                <div
+                  key={idx}
+                  className="grid grid-cols-[1.5fr,1.1fr,1fr,1fr,1fr,0.9fr,1.2fr,0.7fr] items-center gap-4 px-4 py-3"
+                >
+                  {headers.map((_, colIdx) => (
+                    <Skeleton
+                      key={colIdx}
+                      className="h-6 w-full rounded-lg bg-white/5"
+                    />
+                  ))}
+                </div>
+              ))
               : null}
 
             {!isLoading && tokens.length === 0 ? (
