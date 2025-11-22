@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   Bell,
   ChevronDown,
@@ -8,6 +9,8 @@ import {
   Search,
   Settings,
   Star,
+  UserCog,
+  Wallet,
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -58,7 +61,7 @@ export function TopNav() {
         </button>
 
         <div className="flex h-8 items-center gap-1 rounded-full border-2 border-border-subtle/50 bg-surface-800/80 px-2 text-sm font-semibold text-white transition hover:brightness-110">
-          <span className="h-3 w-4 rounded-sm bg-[linear-gradient(135deg,#12c2e9,#c471ed,#f64f59)]" />
+          <Image src="/icons/solana-logo.png" alt="SOL" width={16} height={16} className="rounded-sm" />
           SOL
           <ChevronDown size={14} className="text-text-muted" />
         </div>
@@ -80,18 +83,23 @@ export function TopNav() {
           </Tooltip>
         </div>
 
-        <div className="hidden items-center gap-1 rounded-full border border-border-subtle bg-surface-800/80 px-2 py-1 shadow-inner sm:flex">
-          <LayoutPanelTop size={16} className="text-text-secondary" />
-          <div className="flex items-center gap-1 text-xs font-semibold text-white">
-            <ListChecks size={14} className="text-[#5a8bff]" />
-            <span className="text-[#5a8bff]">0</span>
+        <div className="hidden items-center gap-3 rounded-full border border-border-subtle bg-surface-800/80 pl-3 pr-2 py-1 shadow-inner sm:flex">
+          <Wallet size={16} className="text-text-secondary" />
+          <div className="flex items-center gap-1.5">
+            <Image src="/icons/solana-logo.png" alt="SOL" width={14} height={14} />
+            <span className="text-sm font-bold text-white">0</span>
           </div>
-          <ChevronDown size={14} className="text-text-muted" />
+          <div className="h-4 w-[1px] bg-border-subtle" />
+          <div className="flex items-center gap-1.5">
+            <Image src="/icons/wallet-logo.png" alt="USDC" width={14} height={14} />
+            <span className="text-sm font-bold text-white">0</span>
+          </div>
+          <ChevronDown size={14} className="text-text-muted ml-1" />
         </div>
 
         <Tooltip label="Profile & settings">
           <IconButton size="sm">
-            <Settings size={16} />
+            <UserCog size={18} />
           </IconButton>
         </Tooltip>
       </div>
@@ -103,9 +111,9 @@ function NavButton({ label, tone }: { label: string; tone?: "accent" | "primary"
   return (
     <button
       className={cn(
-        "h-8 min-w-fit flex-shrink-0 px-2 text-nowrap rounded transition text-[14px] font-medium",
-        tone === "accent" ? "text-[#3264ff]" : "",
-        tone === "primary" ? "text-white" : "text-text-secondary hover:text-white hover:bg-accent-blue/20 hover:text-accent-blue",
+        "flex flex-row h-[32px] text-nowrap px-[8px] xl:px-[14px] justify-start items-center transition-none duration-0 rounded-[4px] text-[14px] font-medium",
+        tone === "accent" ? "text-[#3264ff]" : "text-text-secondary",
+        "hover:bg-accent-blue/20 hover:text-accent-blue hover:transition-[background-color,color] hover:duration-135 hover:ease-in-out"
       )}
     >
       {label}
